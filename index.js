@@ -16,16 +16,19 @@ const input = {
         isCustomerSecuritised: true,
       },
     ],
-    paging: {
-      count: 72,
-      pageSize: 10,
-      nextPageKey: '2',
-      previousPageKey: '-1',
-    },
+  },
+  paging: {
+    count: 72,
+    pageSize: 10,
+    nextPageKey: '2',
+    previousPageKey: '-1',
   },
 };
 
-const normalisedResult = normalise(input.data, counterPartyConnectionTypesSchema);
+const beforeSendToNormalise = { ...input.data };
+beforeSendToNormalise.paging = input.paging;
+
+const normalisedResult = normalise(beforeSendToNormalise, counterPartyConnectionTypesSchema);
 console.info(JSON.stringify(normalisedResult));
 // res.status(200)
 // .json(normalisedResult)
